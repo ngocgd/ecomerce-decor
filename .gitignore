@@ -1,0 +1,12 @@
+/node_modules/
+/uploads/
+/package-lock.json
+/logs/
+/apis/
+/src/static/
+*.env
+yarn.lock
+.vscode/
+
+ecosystem.config.js
+.dccache
