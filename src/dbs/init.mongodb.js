@@ -1,22 +1,37 @@
-' use strict ';
+'user strict'
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const {db : {host,name,port}} = require('../configs/config.mongodb')
+const connectString = `mongodb://${host}:${port}/${name}`
+const {countConnect} = require('../helpers/check.connect')
+class DataBase {
+    constructor(){
+        this.connect()
+    }
 
-const connectString = 'mongodb://localhost:27017/shopDEV';
-mongoose.connect(connectString)
-    .then(() => {
-        console.log('Connected to mongoose');
-    })
-    .catch((err) => 
-    {
-        console.log('ERRRRRRRRRRRR connected to db')
-        console.log(err)
-    });
+    
+    connect(type = 'mongodb'){
+        if(1 === 1){
+            mongoose.set('debug',true);
+            mongoose.set('debug',{color : true});
+        }
+        console.log('::::',connectString)
+        mongoose.connect(connectString,{
+            maxPoolSize : 50
+        }).then(()=>{
+            console.log('Connected is sucessfully,count connect :',countConnect());
+        })
+        .catch(err=>{
+            console.log('ERRRRRRRRRRr',err)
+        })
+    }
 
-//dev
-if(1 === 0){
-    mongoose.set('debug',true);
-    mongoose.set('debug',{color : true});
+    static getInstance(){
+        if(!DataBase.instance){
+            DataBase.instance = new DataBase()
+        }
+        return DataBase.instance
+    }
 }
-
-module.exports = mongoose;
+const instanceMongodb = DataBase.getInstance()
+module.exports = instanceMongodb
