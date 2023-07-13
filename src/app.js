@@ -7,16 +7,18 @@ const compression = require('compression');
 
 const app = express();
 // init middleware;
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(compression());
+app.use(morgan('dev'))
+app.use(helmet())
+app.use(compression())
+app.use(express.json())
+app.use(express.urlencoded({
+  extended : true
+}))
 // init db
 require('./dbs/init.mongodb');
-const { checkOverLoad } = require('./helpers/check.connect')
-checkOverLoad()
+// const { checkOverLoad } = require('./helpers/check.connect')
+// checkOverLoad()
 // init routes
-app.get('/haa', (req, res, next) => res.status(200).json({
-  message: 'welcome',
-}));
+app.use('/',require('./routes/index.routes'))
 // handling errors
 module.exports = app;
