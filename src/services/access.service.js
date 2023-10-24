@@ -4,6 +4,7 @@ const crypto = require("crypto")
 const KeyTokenService = require("./keyToken.service")
 const { createTokenPair } = require("../auth/authUtils")
 const { getInfoData } = require("../utils")
+const { BadRequestError } = require("../core/error.response")
 const RoleShop = {
     SHOP: 'SHOP',
     WRITER: 'WRITER',
@@ -12,14 +13,13 @@ const RoleShop = {
 }
 class AccessService {
     static signUp = async ({ name, email, password }) => {
-        try {
+            if(!name || !email || !password){
+                throw new BadRequestError('Required Param!!',1001)
+            }
             // step1  : check email exist
             const holderShop = await shopModel.findOne({ email }).lean()
             if (holderShop) {
-                return {
-                    code: 'xxxx',
-                    message: ' Shop is already exists'
-                }
+                throw new BadRequestError('Error Shop is not exist!!')
             }
             // console.log('kkkkkkk',holderShop)
             const passwordHash = await bcrypt.hash(password, 10)
@@ -65,14 +65,6 @@ class AccessService {
                 code: 200,
                 metadata: null
             }
-        } catch (e) {
-            console.log(e)
-            return {
-                code: 'xxx',
-                message: e.message,
-                status: 'error'
-            }
-        }
     }
 }
 

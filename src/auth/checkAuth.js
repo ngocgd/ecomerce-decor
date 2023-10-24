@@ -44,7 +44,13 @@ const checkPermissions = (permission)=>{
         return next()
     }
 }
+const asyncHandleError = fn =>{
+    return (req,res,next) =>{
+        fn(req,res,next).catch(next)
+    }
+}
 module.exports = {
     apiKey,
-    checkPermissions
+    checkPermissions,
+    asyncHandleError
 }
