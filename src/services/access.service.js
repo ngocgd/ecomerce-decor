@@ -13,7 +13,7 @@ const RoleShop = {
 }
 class AccessService {
     static signUp = async ({ name, email, password }) => {
-            console.log({ name, email, password })
+            console.log('new_logggggggggg',{ name, email, password })
             if(!name || !email || !password){
                 throw new BadRequestError('Required Param!!',1001)
             }
