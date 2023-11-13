@@ -8,5 +8,5 @@
 yarn.lock
 .vscode/
 
-ecosystem.config.js
+# ecosystem.config.js
 .dccache
