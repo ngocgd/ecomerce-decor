@@ -5,6 +5,7 @@ const KeyTokenService = require("./keyToken.service")
 const { createTokenPair } = require("../auth/authUtils")
 const { getInfoData } = require("../utils")
 const { BadRequestError } = require("../core/error.response")
+const { findByEmail } = require("./shop.service")
 const RoleShop = {
     SHOP: 'SHOP',
     WRITER: 'WRITER',
@@ -13,7 +14,6 @@ const RoleShop = {
 }
 class AccessService {
     static signUp = async ({ name, email, password }) => {
-            console.log('new_logggggggggg22222222',{ name, email, password })
             if(!name || !email || !password){
                 throw new BadRequestError('Required Param!!',1001)
             }
@@ -66,6 +66,13 @@ class AccessService {
                 code: 200,
                 metadata: null
             }
+    }
+
+    static login = async({email,password,refreshToken})=>{
+        const shopData = await findByEmail({email})
+        if(!shopData) throw new BadRequestError('Shop not registered')
+
+        const match = bcrypt.compare(password,shopData.password)
     }
 }
 
