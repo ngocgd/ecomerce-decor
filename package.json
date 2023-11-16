@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "start:sv": "node src/server.js",
+    "start:sv": "node server.js",
     "start:job": "node src/cronjob/index.js",
     "start:all": "npm run start:sv & start:job "
   },
