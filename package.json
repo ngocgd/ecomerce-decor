@@ -11,7 +11,7 @@
     "start": "nodemon server.js",
     "start:sv": "node src/server.js",
     "start:job": "node src/cronjob/index.js",
-    "start:all": "npm run start:sv "
+    "start:all": "npm run start:sv & start:job "
   },
   "keywords": [],
   "author": "",
