@@ -15,11 +15,11 @@ class DataBase {
             mongoose.set('debug',true);
             mongoose.set('debug',{color : true});
         }
-        console.log('::::',connectString)
+        // console.log('::::',connectString)
         mongoose.connect(connectString,{
             maxPoolSize : 50
         }).then(()=>{
-            console.log('Connected is sucessfully,count connect :',countConnect());
+            // console.log('Connected is sucessfully,count connect :',countConnect());
         })
         .catch(err=>{
             console.log('ERRRRRRRRRRr',err)

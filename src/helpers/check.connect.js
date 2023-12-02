@@ -6,7 +6,7 @@ const _SECONDS = 5000
 //count connect
 const countConnect = () => {
     const numConnections = mongoose.connections.length
-    console.log('numConnections ', numConnections)
+    // console.log('numConnections ', numConnections)
 }
 //check overload
 const checkOverLoad = () => {
@@ -17,9 +17,9 @@ const checkOverLoad = () => {
 
         //Example maxmimum number of connections based on number osf cores
         const maxConnections = numCores * 5;
-        console.log('Memory usege :',memoryUsage/1024/1024,' MB' )
+        // console.log('Memory usege :',memoryUsage/1024/1024,' MB' )
         if(numConnections > maxConnections){
-            console.log(`Connection overload detected !`)
+            // console.log(`Connection overload detected !`)
         }
     }, _SECONDS) //Monitor every 5 seconds
 }
