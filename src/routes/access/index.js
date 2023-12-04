@@ -11,8 +11,12 @@ const router = express.Router();
 router.post('/signup',asyncHandler(accessController.signUp))
 
 router.post('/login',asyncHandler(accessController.login))
+
 router.use(authentication)
+
 router.post('/logout',asyncHandler(accessController.logout))
+
+router.post('/handleRefreshToken',asyncHandler(accessController.handlerRefreshToken))
 
 
 ///////////////////////

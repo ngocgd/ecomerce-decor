@@ -31,12 +31,17 @@ class BadRequestError extends ErrorMessage{
 }
 
 class AuthFailureError extends ErrorMessage{
-    constructor({message  = ReasonPhrases.UNAUTHORIZED,statusCode = StatusCodes.UNAUTHORIZED}){
+    constructor(message  = ReasonPhrases.UNAUTHORIZED,statusCode = StatusCodes.UNAUTHORIZED){
         super(message,statusCode)
     }
 }
 class NotFoundError extends ErrorMessage{
-    constructor({message  = ReasonPhrases.NOT_FOUND,statusCode = StatusCodes.NOT_FOUND}){
+    constructor(message  = ReasonPhrases.NOT_FOUND,statusCode = StatusCodes.NOT_FOUND){
+        super(message,statusCode)
+    }
+}
+class ForbiddenError extends ErrorMessage{
+    constructor(message  = ReasonPhrases.FORBIDDEN,statusCode = StatusCodes.FORBIDDEN){
         super(message,statusCode)
     }
 }
@@ -44,5 +49,6 @@ module.exports = {
     ConflixRequestError,
     BadRequestError,
     AuthFailureError,
-    NotFoundError
+    NotFoundError,
+    ForbiddenError
 }
