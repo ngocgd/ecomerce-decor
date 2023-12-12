@@ -5,7 +5,7 @@ const config = {
             post : 3000
         },
         db : {
-            host : process.env.DEV_HOST || '54.254.141.49',
+            host : process.env.DEV_HOST || '54.254.170.153',
             port : process.env.DEV_PORT || 27017,
             name : process.env.DEV_NAME || 'dbDev'
         }
