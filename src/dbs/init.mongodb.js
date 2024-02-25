@@ -1,8 +1,8 @@
 'user strict'
 
 const mongoose = require('mongoose')
-const {db : {host,name,port}} = require('../configs/config.mongodb')
-const connectString = `mongodb://${host}:${port}/${name}`
+const {db : {host,name,port,user,pass_word}} = require('../configs/config.mongodb')
+const connectString = `mongodb://${user}:${pass_word}@${host}:${port}/${name}`
 const {countConnect} = require('../helpers/check.connect')
 class DataBase {
     constructor(){
@@ -15,7 +15,7 @@ class DataBase {
             mongoose.set('debug',true);
             mongoose.set('debug',{color : true});
         }
-        // console.log('::::',connectString)
+        console.log('::::',connectString)
         mongoose.connect(connectString,{
             maxPoolSize : 50
         }).then(()=>{

@@ -7,7 +7,9 @@ const config = {
         db : {
             host : process.env.DEV_HOST || '54.254.170.153',
             port : process.env.DEV_PORT || 27017,
-            name : process.env.DEV_NAME || 'dbDev'
+            name : process.env.DEV_DATABASE_NAME || 'dev_ecommerce',
+            user : process.env.DB_USERNAME || 'ecommerce_user',
+            pass_word : process.env.DB_PASSWORD || '12341234',
         }
     },
     production :{

@@ -2,6 +2,7 @@
 
 const { CREATED, SuccessResponse } = require("../core/sucess.response");
 const ProductServices = require("../services/product.service");
+const ProductServicesV2 = require("../services/product.service.xxx");
 
 
 class ProductController {
@@ -9,7 +10,7 @@ class ProductController {
         req.body.product_shop = req.user.userId
         new SuccessResponse({
             message: 'Create product success',
-            metadata: await ProductServices.createProduct(req.body.product_type, req.body)
+            metadata: await ProductServicesV2.createProduct(req.body.product_type, req.body)
         }).send(res)
     }
 }
