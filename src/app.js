@@ -24,7 +24,7 @@ app.use('/',require('./routes/index.routes'))
 
 // handling errors
 app.use((req,res,next)=>{
-  const err = new Error('Not found')
+  const err = new Error('Not found router')
   err.status = 404
   next(err)
 })
