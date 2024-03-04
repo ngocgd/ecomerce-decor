@@ -2,6 +2,7 @@
 
 const { BadRequestError } = require('../core/error.response')
 const { product, clothing, electronic, furniture } = require('../models/product.model')
+const { findAllDraftForShop, publishProductByShop, findAllPublishForShop, unPublishProductByShop, searchProductByUser } = require('../models/repositories/product.repo')
 
 class ProductFactory {
     /*
@@ -15,9 +16,31 @@ class ProductFactory {
     }
     static async createProduct(type, payload) {
         const productClass = ProductFactory.produtRegistry[type]
-        console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXX',productClass)
         if (!productClass) throw new BadRequestError(`Invalid product type ${type}`)
         return new productClass(payload).createProduct()
+    }
+
+    static async findAllDraftForShop({ product_shop, limit = 50, skip = 0 }) {
+        const query = { product_shop, isDraft: true }
+        return await findAllDraftForShop({ query, limit, skip })
+    }
+
+    static async findAllPublishForShop({ product_shop, limit = 50, skip = 0 }) {
+        const query = { product_shop, isPublish: true }
+        return await findAllPublishForShop({ query, limit, skip })
+    }
+
+    //PUT//
+    static async publishProductByShop({ product_shop, product_id }) {
+        return await publishProductByShop({ product_shop, product_id })
+    }
+
+    static async unPublishProductByShop({ product_shop, product_id }) {
+        return await unPublishProductByShop({ product_shop, product_id })
+    }
+    //END PUT//
+    static async searchProducts({ keySearch }) {
+        return await searchProductByUser({ keySearch })
     }
 }
 /*product_name: { type: String, required: true },
@@ -92,8 +115,8 @@ class Furniture extends Product {
     }
 }
 
-ProductFactory.registerProductType('Electronics',Electronics)
-ProductFactory.registerProductType('Clothing',Clothing)
-ProductFactory.registerProductType('Furniture',Furniture)
+ProductFactory.registerProductType('Electronics', Electronics)
+ProductFactory.registerProductType('Clothing', Clothing)
+ProductFactory.registerProductType('Furniture', Furniture)
 
 module.exports = ProductFactory
