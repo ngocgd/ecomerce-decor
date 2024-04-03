@@ -86,6 +86,7 @@ class AccessService {
     }
 
     static signUp = async ({ name, email, password }) => {
+        console.log('AAAAAAAA')
         if (!name || !email || !password) {
             throw new BadRequestError('Required Param!!', 1001)
         }
